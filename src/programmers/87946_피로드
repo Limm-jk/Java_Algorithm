@@ -1,0 +1,27 @@
+class Solution {
+    boolean[] visited;
+    int[][] dun;
+    int max = 0;
+    
+    public int solution(int k, int[][] dungeons) {
+        visited = new boolean[dungeons.length];
+        dun = dungeons;
+        
+        tracking(k, 0);
+        // int answer = -1;
+        return max;
+    }
+    
+    public void tracking(int k, int depth) {
+        
+        for (int i = 0; i < visited.length; i ++) {
+            if (k >= dun[i][0] && !visited[i] && (k - dun[i][1]) > 0) {
+                visited[i] = true;
+                tracking(k - dun[i][1], depth + 1);
+                visited[i] = false;
+            }
+        }
+        
+        max = Math.max(max, depth);
+    }
+}
